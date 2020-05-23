@@ -713,7 +713,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
                 if (i < len - 1) {
                     // Add an extra line break if the previous object property
                     // had a multi-line value.
-                    parts.push(separator + (multiLine ? "\n\n" : "\n"));
+                    parts.push(separator + "\n");
                     allowBreak = !multiLine;
                 } else if (len !== 1 && isTypeAnnotation) {
                     parts.push(separator);
