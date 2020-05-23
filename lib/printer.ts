@@ -754,7 +754,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
           if (i < len - 1) {
             // Add an extra line break if the previous object property
             // had a multi-line value.
-            parts.push(separator + (multiLine ? "\n\n" : "\n"));
+            parts.push(separator + "\n");
             allowBreak = !multiLine;
           } else if (len !== 1 && isTypeAnnotation) {
             parts.push(separator);
@@ -929,7 +929,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
       return fromString(getPossibleRaw(n) || n.value + "m", options);
 
     case "StringLiteral":
-        return fromString(nodeStr(n.value, options));
+      return fromString(nodeStr(n.value, options));
 
     case "BooleanLiteral": // Babel 6 Literal split
     case "Literal":
@@ -1471,10 +1471,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
       return concat(parts);
 
     case "ClassAccessorProperty": {
-      parts.push(
-        ...printClassMemberModifiers(n),
-        "accessor ",
-      );
+      parts.push(...printClassMemberModifiers(n), "accessor ");
 
       if (n.computed) {
         parts.push("[", path.call(print, "key"), "]");
@@ -2233,7 +2230,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
             return member.concat(";");
           }
           return member;
-        })
+        }),
       );
 
       if (members.isEmpty()) {
@@ -2286,8 +2283,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
       return concat([path.call(print, "left"), ".", path.call(print, "right")]);
 
     case "TSAsExpression":
-    case "TSSatisfiesExpression":
-    {
+    case "TSSatisfiesExpression": {
       const expression = path.call(print, "expression");
       parts.push(
         expression,
@@ -2475,7 +2471,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
             return element.concat(";");
           }
           return element;
-        })
+        }),
       );
       if (lines.isEmpty()) {
         return fromString("{}", options);
@@ -2581,7 +2577,6 @@ function genericPrintNoParens(path: any, options: any, print: any) {
 
       return concat(parts);
     }
-
 
     // https://github.com/babel/babel/pull/10148
     case "V8IntrinsicIdentifier":
